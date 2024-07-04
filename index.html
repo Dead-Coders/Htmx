@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <style>
+      #toast.htmx-settling {
+        opacity: 100;
+      }
+
+      #toast {
+        background: #e1f0da;
+        opacity: 0;
+        transition: opacity 3s ease-out;
+      }
+    </style>
+    <form
+      id="checked-contacts"
+      hx-post="/users"
+      hx-swap="outerHTML settle:3s"
+      hx-target="#toast"
+    >
+      <table>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Active</th>
+          </tr>
+        </thead>
+        <tbody id="tbody">
+          <tr>
+            <td>Joe Smith</td>
+            <td>joe@smith.org</td>
+            <td><input type="checkbox" name="active:joe@smith.org" /></td>
+          </tr>
+          ...
+        </tbody>
+      </table>
+      <input type="submit" value="Bulk Update" />
+      <span id="toast"></span>
+    </form>
+
+    <script src="./js/htmx.min.js"></script>
+  </body>
+</html>
